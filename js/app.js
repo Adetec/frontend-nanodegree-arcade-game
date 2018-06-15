@@ -23,7 +23,7 @@ class Enemy {
         // You should multiply any movement by the dt parameter
         // which will ensure the game runs at the same speed for
         // all computers.
-        this.x+= this.sp*dt;
+        (this.x<505)? this.x+= this.sp*dt : this.x = -100;
     }
 }
 
@@ -47,13 +47,17 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [];
 let pos = 60;
+
 for (let num = 1; num <= 3; num++){
     
     console.log(pos)
     
-    let bug = new Enemy(200,pos, 40);
+    let bug = new Enemy(-200,pos, 200);
+    
     allEnemies.push(bug);
     pos +=85;
+    
+    
 }
 // Place the player object in a variable called player
 let player = new Player();
