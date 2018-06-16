@@ -47,15 +47,17 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [];
 let pos = 60;
+let xStart = -200;
 
 for (let num = 1; num <= 3; num++){
     
     console.log(pos)
     
-    let bug = new Enemy(-200,pos, 200);
+    let bug = new Enemy(xStart,pos, 100);
     
     allEnemies.push(bug);
     pos +=85;
+    xStart -= 200;
     
     
 }
