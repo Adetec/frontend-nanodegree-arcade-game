@@ -1,3 +1,4 @@
+let movementMultip = 40;
 // Enemies our player must avoid
 class Enemy {
     constructor(x, y, sp) {
@@ -17,14 +18,25 @@ class Enemy {
     };
     }
 
+    // Random speed movement for each new Enemy
+    randomSpeed() {
+        this.sp = movementMultip * Math.floor(Math.random() * 10+1);
+    }
+
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
+    
     update(dt) {
         // You should multiply any movement by the dt parameter
         // which will ensure the game runs at the same speed for
         // all computers.
-        (this.x<505)? this.x+= this.sp*dt : this.x = -100;
+        let run = ()=>{this.x = (this.x + this.sp) * dt; this.randomSpeed()};
+        (this.x<505)?  run() : this.x = -100;
+         
+        
     }
+
+    
 }
 
 // Now write your own player class
@@ -47,17 +59,17 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [];
 let pos = 60;
-let xStart = -200;
+//let xStart = -200;
 
 for (let num = 1; num <= 3; num++){
     
     console.log(pos)
     
-    let bug = new Enemy(xStart,pos, 100);
+    let bug = new Enemy(100,pos, 200);
     
     allEnemies.push(bug);
     pos +=85;
-    xStart -= 200;
+    //xStart -= 200;
     
     
 }
