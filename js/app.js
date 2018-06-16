@@ -30,8 +30,8 @@ class Enemy {
         // You should multiply any movement by the dt parameter
         // which will ensure the game runs at the same speed for
         // all computers.
-        let run = ()=>{this.x = (this.x + this.sp) * dt; this.randomSpeed()};
-        (this.x<505)?  run() : this.x = -100;
+        let run = ()=>{this.x = -100; ; this.randomSpeed()};
+        (this.x<505)?  this.x += this.sp * dt : run()
          
         
     }
@@ -65,11 +65,11 @@ for (let num = 1; num <= 3; num++){
     
     console.log(pos)
     
-    let bug = new Enemy(100,pos, 200);
+    let bug = new Enemy(-200,pos, 200);
     
     allEnemies.push(bug);
     pos +=85;
-    //xStart -= 200;
+
     
     
 }
