@@ -49,24 +49,24 @@ class Player {
         this.x = 200;
         this.y = 400;
         this.moveX = 100;
-        this.moveY = -100; 
+        this.moveY = -83; 
     }
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-
+    // move player with arrows keys & prevent move if player will be offscreen
     handleInput(allowedKeys) {
-        if (allowedKeys == 'left') {
+        if (allowedKeys == 'left' && this.x > 0) {
             this.x -= this.moveX;
         }
-        if (allowedKeys == 'right') {
+        if (allowedKeys == 'right' && this.x < 400) {
             this.x += this.moveX;
         }
-        if (allowedKeys == 'up') {
+        if (allowedKeys == 'up' && this.y > 0) {
             this.y += this.moveY;
         }
-        if (allowedKeys == 'down') {
+        if (allowedKeys == 'down' && this.y < 400) {
             this.y -= this.moveY;
         }
         
