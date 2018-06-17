@@ -30,7 +30,7 @@ class Enemy {
         // You should multiply any movement by the dt parameter
         // which will ensure the game runs at the same speed for
         // all computers.
-        let run = ()=>{this.x = -100; ; this.randomSpeed()};
+        let run = ()=>{this.x = -300; ; this.randomSpeed()};
         (this.x<505)?  this.x += this.sp * dt : run()
          
         
@@ -47,11 +47,29 @@ class Player {
         this.sprite = 'images/char-boy.png';
         this.playerLives = 3;
         this.x = 200;
-        this.y = 400;  
+        this.y = 400;
+        this.moveX = 100;
+        this.moveY = -100; 
     }
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    handleInput(allowedKeys) {
+        if (allowedKeys == 'left') {
+            this.x -= this.moveX;
+        }
+        if (allowedKeys == 'right') {
+            this.x += this.moveX;
+        }
+        if (allowedKeys == 'up') {
+            this.y += this.moveY;
+        }
+        if (allowedKeys == 'down') {
+            this.y -= this.moveY;
+        }
+        
     }
 }
 
@@ -65,7 +83,7 @@ for (let num = 1; num <= 3; num++){
     
     console.log(pos)
     
-    let bug = new Enemy(-200,pos, 200);
+    let bug = new Enemy(-600,pos, 200);
     
     allEnemies.push(bug);
     pos +=85;
