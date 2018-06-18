@@ -77,10 +77,11 @@ class Player {
             this.y -= this.moveY;
         }        
     }
-    // Check if player reach the water increase level
+    // Check if player reach the water reset his position & increase level
     increaseLevel() {
        if (this.y === -15) {
            setTimeout(() => {
+            this.x = 200;
             this.y = 400;    
            }, 100);
            movementMultip += 10;
