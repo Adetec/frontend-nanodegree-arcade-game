@@ -31,7 +31,8 @@ class Enemy {
         // which will ensure the game runs at the same speed for
         // all computers.
         let run = ()=>{this.x = -300; ; this.randomSpeed()};
-        (this.x<505)?  this.x += this.sp * dt : run()
+        (this.x<505)?  this.x += this.sp * dt : run();
+        
          
         
     }
@@ -45,15 +46,20 @@ class Enemy {
 class Player {
     constructor() {
         this.sprite = 'images/char-boy.png';
-        this.playerLives = 3;
         this.x = 200;
         this.y = 400;
         this.moveX = 100;
-        this.moveY = -83; 
+        this.moveY = -83;
+        this.remainAlive = 3;
+    }
+
+    update() {
+    
     }
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        player.increaseLevel();
     }
     // move player with arrows keys & prevent move if player will be offscreen
     handleInput(allowedKeys) {
@@ -68,8 +74,16 @@ class Player {
         }
         if (allowedKeys == 'down' && this.y < 400) {
             this.y -= this.moveY;
+        }        
+    }
+    // Check if player reach the water increase level
+    increaseLevel() {
+       if (this.y === -15) {
+           setTimeout(() => {
+            this.y = 400;    
+           }, 100);
+           movementMultip ++;
         }
-        
     }
 }
 
@@ -83,13 +97,10 @@ for (let num = 1; num <= 3; num++){
     
     console.log(pos)
     
-    let bug = new Enemy(-600,pos, 200);
+    let bug = new Enemy(-1000,pos, 200);
     
     allEnemies.push(bug);
-    pos +=85;
-
-    
-    
+    pos +=85;   
 }
 // Place the player object in a variable called player
 let player = new Player();
