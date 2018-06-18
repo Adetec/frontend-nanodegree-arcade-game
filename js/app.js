@@ -55,9 +55,9 @@ class Enemy {
 
         if (playerPosition.x < enemyPosition.x + enemyPosition.width && playerPosition.x + playerPosition.width > enemyPosition.x && playerPosition.y < enemyPosition.y + enemyPosition.height && playerPosition.y + playerPosition.height > enemyPosition.y) {
             player.resetPlayer();
+            player.remainAlive--;
         }
         
-        console.log(playerPosition.x < enemyPosition.x + enemyPosition.width && playerPosition.x + playerPosition.width > enemyPosition.x);
     }
 
     
@@ -78,7 +78,10 @@ class Player {
     }
 
     update() {
-            
+        if (this.remainAlive < 1) {
+            alert("game over");
+            location.reload();
+        }
     }
 
     render() {
