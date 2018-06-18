@@ -51,6 +51,7 @@ class Player {
         this.moveX = 100;
         this.moveY = -83;
         this.remainAlive = 3;
+        this.level = 1;
     }
 
     update() {
@@ -59,7 +60,7 @@ class Player {
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        player.increaseLevel();
+        
     }
     // move player with arrows keys & prevent move if player will be offscreen
     handleInput(allowedKeys) {
@@ -82,7 +83,8 @@ class Player {
            setTimeout(() => {
             this.y = 400;    
            }, 100);
-           movementMultip ++;
+           movementMultip += 10;
+           this.level++;
         }
     }
 }
@@ -118,4 +120,5 @@ document.addEventListener('keyup', e => {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+    player.increaseLevel();
 });
