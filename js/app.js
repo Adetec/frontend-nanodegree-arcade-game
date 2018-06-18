@@ -121,6 +121,10 @@ class Player {
         if (this.remainAlive < 1) {
             this.x = -100;
             allEnemies = [];
+
+            setTimeout(() => {
+                location.reload();
+            }, 3000);
         }
     }
 }
