@@ -32,9 +32,6 @@ class Enemy {
         // all computers.
         let run = ()=>{this.x = -300; ; this.randomSpeed()};
         (this.x<505)?  this.x += this.sp * dt : run();
-        
-         
-        
     }
 
     
@@ -55,7 +52,7 @@ class Player {
     }
 
     update() {
-    
+            
     }
 
     render() {
@@ -77,16 +74,21 @@ class Player {
             this.y -= this.moveY;
         }        
     }
-    // Check if player reach the water reset his position & increase level
+    // Check if player reachs the water increase level & reset his position
     increaseLevel() {
+        
        if (this.y === -15) {
-           setTimeout(() => {
-            this.x = 200;
-            this.y = 400;    
-           }, 100);
-           movementMultip += 10;
-           this.level++;
-        }
+        movementMultip += 10;
+        this.level++;
+        setTimeout(() => {
+            this.resetPlayer();
+        }, 100);
+        }        
+    }
+    // reset player position
+    resetPlayer() {
+       this.x = 200;
+       this.y = 400;
     }
 }
 
