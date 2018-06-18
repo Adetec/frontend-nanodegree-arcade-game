@@ -1,4 +1,8 @@
 let movementMultip = 40;
+let box = {
+    width: 50,
+    height: 40
+}
 // Enemies our player must avoid
 class Enemy {
     constructor(x, y, sp) {
@@ -32,6 +36,28 @@ class Enemy {
         // all computers.
         let run = ()=>{this.x = -300; ; this.randomSpeed()};
         (this.x<505)?  this.x += this.sp * dt : run();
+    }
+
+    checkCollisions() {
+
+        let playerPosition =  {
+            x: player.x,
+            y: player.y,
+            width: box.width,
+            height: box.height
+        }
+        let enemyPosition = {
+            x: this.x,
+            y: this.y,
+            width: box.width +10,
+            height: box.height
+        }
+
+        if (playerPosition.x < enemyPosition.x + enemyPosition.width && playerPosition.x + playerPosition.width > enemyPosition.x && playerPosition.y < enemyPosition.y + enemyPosition.height && playerPosition.y + playerPosition.height > enemyPosition.y) {
+            player.resetPlayer();
+        }
+        
+        console.log(playerPosition.x < enemyPosition.x + enemyPosition.width && playerPosition.x + playerPosition.width > enemyPosition.x);
     }
 
     

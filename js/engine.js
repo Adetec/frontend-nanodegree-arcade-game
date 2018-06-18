@@ -81,7 +81,7 @@ const Engine = ((global => {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        //checkCollisions();
     }
    
     /* This is called by the update function and loops through all of the
@@ -94,6 +94,7 @@ const Engine = ((global => {
     function updateEntities(dt) {
         allEnemies.forEach(enemy => {
             enemy.update(dt);
+            enemy.checkCollisions();
         });
         player.update();
     }
