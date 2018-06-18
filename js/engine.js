@@ -24,6 +24,7 @@ const Engine = ((global => {
     let canvas = doc.createElement('canvas');
     let ctx = canvas.getContext('2d');
     let lastTime;
+    let resetDocument = doc.getElementById('#game-over');
    
     canvas.width = 505;
     canvas.height = 606;

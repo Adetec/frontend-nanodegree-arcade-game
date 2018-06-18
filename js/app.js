@@ -78,10 +78,7 @@ class Player {
     }
 
     update() {
-        if (this.remainAlive < 1) {
-            alert("game over");
-            location.reload();
-        }
+        this.gameOver();
     }
 
     render() {
@@ -119,6 +116,13 @@ class Player {
        this.x = 200;
        this.y = 400;
     }
+
+    gameOver() {
+        if (this.remainAlive < 1) {
+            this.x = -100;
+            allEnemies = [];
+        }
+    }
 }
 
 // Now instantiate your objects.
@@ -129,7 +133,6 @@ let pos = 60;
 
 for (let num = 1; num <= 3; num++){
     
-    console.log(pos)
     
     let bug = new Enemy(-1000,pos, 200);
     
