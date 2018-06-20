@@ -56,6 +56,7 @@ class Enemy {
         if (playerPosition.x < enemyPosition.x + enemyPosition.width && playerPosition.x + playerPosition.width > enemyPosition.x && playerPosition.y < enemyPosition.y + enemyPosition.height && playerPosition.y + playerPosition.height > enemyPosition.y) {
             player.resetPlayer();
             player.remainAlive--;
+            lives.pop();
         }
         
     }
@@ -145,6 +146,29 @@ for (let num = 1; num <= 3; num++){
 }
 // Place the player object in a variable called player
 let player = new Player();
+
+class Life {
+    constructor(x, y) {
+        this.sprite = 'images/Heart.png';
+        this.x = x;
+        this.y = y;
+        this.width = 25;
+        this.height = 42;
+    }
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
+        
+    }
+}
+
+let lives = [];
+
+for (let i = 1; i <= player.remainAlive; i++) {
+    let heart = new Life(i*20, 0);
+    lives.push(heart);
+    
+}
 
 
 
