@@ -84,7 +84,9 @@ class Player {
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        
+        ctx.font = '24px serif';
+        ctx.strokeStyle = 'red';
+        ctx.strokeText('Level: '+this.level, 200, 20);
     }
     // move player with arrows keys & prevent move if player will be offscreen
     handleInput(allowedKeys) {
@@ -112,6 +114,11 @@ class Player {
         }, 100);
         }        
     }
+
+    levelText() {
+    
+    }
+
     // reset player position
     resetPlayer() {
        this.x = 200;
