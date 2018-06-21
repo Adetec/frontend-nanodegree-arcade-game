@@ -1,8 +1,9 @@
 let movementMultip = 40;
-let box = {
+const box = {
     width: 50,
     height: 40
 }
+let waterScore = 0;
 // Enemies our player must avoid
 class Enemy {
     constructor(x, y, sp) {
@@ -118,15 +119,18 @@ class Player {
             setTimeout(() => {
                 star.x = -100;
                 star.y = -100;
-            }, 100);
+            }, 2000);
         }       
     }
 
     addScore() {
-        const score = [100, 80, 60, 40, 20];
         const playerX = [0, 100, 200, 300, 400];
+        const scores = [100, 80, 60, 40, 20];
         for (let x = 0; x <= playerX.length ; x++) {
-            (playerX[x] == this.x)? this.score+= score[x]: this.score;
+            if (playerX[x] == this.x) {
+                this.score+= scores[x];
+                star.score = scores[x];
+            }
         }
     }
 
@@ -194,10 +198,15 @@ class Star {
         this.x = x;
         this.y = y;
         this.sprite = 'images/Star.png';
+        this.score = 0;
     }
 
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        ctx.font = '16px arial';
+        ctx.strokeStyle = 'red';
+        ctx.strokeText('+'+this.score, this.x+35, this.y+110);
+        
     }
 }
 
