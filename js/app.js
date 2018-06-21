@@ -88,6 +88,7 @@ class Player {
         ctx.font = '24px fantasy';
         ctx.strokeStyle = '#4caf50';
         ctx.strokeText('Level: '+this.level, 200, 30);
+        ctx.fillText('Score: '+this.score, 350, 30)
     }
     // move player with arrows keys & prevent move if player will be offscreen
     handleInput(allowedKeys) {
