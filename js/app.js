@@ -76,6 +76,7 @@ class Player {
         this.moveY = -83;
         this.remainAlive = 3;
         this.level = 1;
+        this.score = 5;
     }
 
     update() {
@@ -84,9 +85,9 @@ class Player {
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        ctx.font = '24px serif';
-        ctx.strokeStyle = 'red';
-        ctx.strokeText('Level: '+this.level, 200, 20);
+        ctx.font = '24px fantasy';
+        ctx.strokeStyle = '#4caf50';
+        ctx.strokeText('Level: '+this.level, 200, 30);
     }
     // move player with arrows keys & prevent move if player will be offscreen
     handleInput(allowedKeys) {
@@ -109,9 +110,9 @@ class Player {
        if (this.y === -15) {
         movementMultip += 10;
         this.level++;
-        setTimeout(() => {
-            this.resetPlayer();
-        }, 100);
+            setTimeout(() => {
+                this.resetPlayer();
+            }, 100);
         }        
     }
 
