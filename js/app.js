@@ -105,7 +105,7 @@ class Player {
         }        
     }
     // Check if player reachs the water increase level & reset his position
-    increaseLevel() {
+    reachWater() {
         
        if (this.y === -15) {
         movementMultip += 10;
@@ -210,5 +210,5 @@ document.addEventListener('keyup', e => {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
-    player.increaseLevel();
+    player.reachWater();
 });
