@@ -110,8 +110,12 @@ class Player {
        if (this.y === -15) {
         movementMultip += 10;
         this.level++;
+        star.x = this.x;
+        star.y = this.y;
+        this.resetPlayer();
             setTimeout(() => {
-                this.resetPlayer();
+                star.x = -100;
+                star.y = -100;
             }, 100);
         }        
     }
@@ -177,6 +181,21 @@ for (let i = 1; i <= player.remainAlive; i++) {
     lives.push(heart);
     
 }
+
+
+class Star {
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+        this.sprite = 'images/Star.png';
+    }
+
+    render(){
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
+
+let star = new Star(-100, -100);
 
 
 

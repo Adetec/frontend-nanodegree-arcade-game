@@ -163,6 +163,7 @@ const Engine = ((global => {
         for (const life of lives) {
             life.render();
         }
+        star.render();
     }
    
     /* This function does nothing but it could have been a good place to
@@ -183,7 +184,8 @@ const Engine = ((global => {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/Heart.png'
+        'images/Heart.png',
+        'images/Star.png'
     ]);
     Resources.onReady(init);
    
