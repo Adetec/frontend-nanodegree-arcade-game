@@ -76,7 +76,7 @@ class Player {
         this.moveY = -83;
         this.remainAlive = 3;
         this.level = 1;
-        this.score = 5;
+        this.score = 0;
     }
 
     update() {
@@ -112,16 +112,21 @@ class Player {
         this.level++;
         star.x = this.x;
         star.y = this.y;
+        this.addScore();
         this.resetPlayer();
             setTimeout(() => {
                 star.x = -100;
                 star.y = -100;
             }, 100);
-        }        
+        }       
     }
 
-    levelText() {
-    
+    addScore() {
+        const score = [100, 80, 60, 40, 20];
+        const playerX = [0, 100, 200, 300, 400];
+        for (let x = 0; x <= playerX.length ; x++) {
+            (playerX[x] == this.x)? this.score+= score[x]: this.score;
+        }
     }
 
     // reset player position
