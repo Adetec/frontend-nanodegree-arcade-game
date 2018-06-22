@@ -134,6 +134,7 @@ class Player {
             setTimeout(() => {
                 star.x = -100;
                 star.y = -100;
+                gem.display();
             }, 2000);
         }       
     }
@@ -211,6 +212,7 @@ class Star {
         this.y = y;
         this.sprite = 'images/Star.png';
         this.score = 0;
+        this.gemScore = undefined;
     }
 
     render(){
@@ -233,18 +235,27 @@ class Gems {
         this.y = 70;
         this.positionY = [80, 165, 250];
         this.sprite = sprite;
-        this.type = ['blue', 'green', 'orange'];
+        this.type = ['orange', 'blue', 'green'];
+        this.gemSelected = undefined;
     }
 
     random() {
-        this.sprite = `images/gem-${this.type[Math.floor(Math.random() * this.type.length)]}.png`;
+        this.gemSelected = (Math.floor(Math.random() * this.type.length));
+        this.sprite = `images/gem-${this.type[this.gemSelected]}.png`;
         this.x = this.positionX[Math.floor(Math.random() * this.positionX.length)];
         this.y = this.positionY[Math.floor(Math.random() * this.positionY.length)];
-        console.log(this.sprite, this.x)
+        console.log(this.sprite, this.x, this.gemSelected)
     }
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x+10, this.y, 80, 135);
+    }
+
+    display() {
+        this.random();
+        setTimeout(() => {
+            this.x = -100;
+        }, 6000);
     }
 
     checkCollisions() {
@@ -263,7 +274,7 @@ class Gems {
         }
 
         if (playerPosition.x < gemPosition.x + gemPosition.width && playerPosition.x + playerPosition.width > gemPosition.x && playerPosition.y < gemPosition.y + gemPosition.height && playerPosition.y + playerPosition.height > gemPosition.y) {
-            player.addScore();
+            player.score += (this.gemSelected+1)*100;
             this.x = -100;
         }
         
