@@ -156,9 +156,17 @@ const Engine = ((global => {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        for (const enemy of allEnemies) {    
+        for (const enemy of allEnemies) {
             enemy.render();
         };
+
+        lives = [];
+
+        for (let i = 1; i <= player.remainAlive; i++) {
+            let heart = new Life(i*20, 0);
+            lives.push(heart);
+            
+        }
            player.render();
         
         for (const life of lives) {
@@ -166,6 +174,7 @@ const Engine = ((global => {
         }
         star.render();
         gem.render();
+        keyLive.render();
     }
    
     /* This function does nothing but it could have been a good place to
@@ -195,8 +204,8 @@ const Engine = ((global => {
         'images/Star.png',
         'images/gem-blue.png',
         'images/gem-green.png',
-        'images/gem-orange.png'
-
+        'images/gem-orange.png',
+        'images/key.png'
     ]);
     Resources.onReady(init);
    

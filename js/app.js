@@ -72,6 +72,7 @@ class Enemy {
             player.resetPlayer();
             player.remainAlive--;
             lives.pop();
+            (player.remainAlive < 3 && player.remainAlive >0) && keyLive.display();
         }
         
     }
@@ -192,18 +193,11 @@ class Life {
     }
 
     render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
-        
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height); 
     }
 }
 
-let lives = [];
 
-for (let i = 1; i <= player.remainAlive; i++) {
-    let heart = new Life(i*20, 0);
-    lives.push(heart);
-    
-}
 
 
 class Star {
@@ -283,6 +277,59 @@ class Gems {
 
 let gem = new Gems('images/gem-blue.png');
 
+class Keylive {
+    constructor(x, y) {
+        this.sprite = 'images/key.png';
+        this.x = x;
+        this.positionX = [0, 100, 200, 300, 400];
+        this.y = y;
+        this.positionY = [80, 165, 250];
+    }
+
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x+10, this.y, 80, 135);
+    }
+
+    random() {
+        this.x = this.positionX[Math.floor(Math.random() * this.positionX.length)];
+        this.y = this.positionY[Math.floor(Math.random() * this.positionY.length)];
+    }
+
+    display() {
+        this.random();
+        setTimeout(() => {
+            this.x = -100;
+        }, 6000);
+    }
+
+    checkCollisions() {
+
+        let playerPosition =  {
+            x: player.x,
+            y: player.y,
+            width: box.width,
+            height: box.height
+        }
+        let keyPosition = {
+            x: this.x,
+            y: this.y,
+            width: box.width +10,
+            height: box.height
+        }
+
+        if (playerPosition.x < keyPosition.x + keyPosition.width && playerPosition.x + playerPosition.width > keyPosition.x && playerPosition.y < keyPosition.y + keyPosition.height && playerPosition.y + playerPosition.height > keyPosition.y) {
+            player.remainAlive++;
+            let heart = new Life(lives.length*20, 0);
+            lives.push(heart);
+            this.x = -100;
+        }
+        
+    }
+
+
+}
+
+let keyLive = new Keylive(200, 200);
 
 
 // This listens for key presses and sends the keys to your
@@ -298,4 +345,5 @@ document.addEventListener('keyup', e => {
     player.handleInput(allowedKeys[e.keyCode]);
     player.reachWater();
     gem.checkCollisions();
+    keyLive.checkCollisions();
 });
