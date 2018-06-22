@@ -192,9 +192,9 @@ const Engine = ((global => {
         'images/Selector.png',
         'images/Heart.png',
         'images/Star.png',
-        'images/gem-blue',
-        'images/gem-green',
-        'images/gem-orange'
+        'images/gem-blue.png',
+        'images/gem-green.png',
+        'images/gem-orange.png'
 
     ]);
     Resources.onReady(init);

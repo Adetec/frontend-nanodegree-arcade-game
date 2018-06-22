@@ -230,6 +230,9 @@ class Gems {
         this.y = 300;
         this.sprite = 'images/gem-blue.png';
     }
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
 }
 
 
