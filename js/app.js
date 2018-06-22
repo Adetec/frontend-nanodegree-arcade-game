@@ -225,15 +225,28 @@ class Star {
 let star = new Star(-100, -100);
 
 class Gems {
-    constructor() {
-        this.x = 100;
-        this.y = 300;
-        this.sprite = 'images/gem-blue.png';
+    constructor(sprite, x, y) {
+        this.x = x;
+        this.positionX = [0, 100, 200, 300, 400];
+        this.y = 70;
+        this.positionY = [80, 165, 250];
+        this.sprite = sprite;
+        this.type = ['blue', 'green', 'orange'];
     }
+
+    random() {
+        this.sprite = `images/gem-${this.type[Math.floor(Math.random() * this.type.length)]}.png`;
+        this.x = this.positionX[Math.floor(Math.random() * this.positionX.length)];
+        this.y = this.positionY[Math.floor(Math.random() * this.positionY.length)];
+        console.log(this.sprite, this.x)
+    }
+
     render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        ctx.drawImage(Resources.get(this.sprite), this.x+10, this.y, 80, 135);
     }
 }
+
+let gem = new Gems('images/gem-blue.png');
 
 
 
