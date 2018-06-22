@@ -220,6 +220,8 @@ class Star {
         ctx.strokeText('+'+this.score, this.x+35, this.y+110);
         
     }
+
+    
 }
 
 let star = new Star(-100, -100);
@@ -244,6 +246,28 @@ class Gems {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x+10, this.y, 80, 135);
     }
+
+    checkCollisions() {
+
+        let playerPosition =  {
+            x: player.x,
+            y: player.y,
+            width: box.width,
+            height: box.height
+        }
+        let gemPosition = {
+            x: this.x,
+            y: this.y,
+            width: box.width +10,
+            height: box.height
+        }
+
+        if (playerPosition.x < gemPosition.x + gemPosition.width && playerPosition.x + playerPosition.width > gemPosition.x && playerPosition.y < gemPosition.y + gemPosition.height && playerPosition.y + playerPosition.height > gemPosition.y) {
+            player.addScore();
+            this.x = -100;
+        }
+        
+    }
 }
 
 let gem = new Gems('images/gem-blue.png');
@@ -262,4 +286,5 @@ document.addEventListener('keyup', e => {
 
     player.handleInput(allowedKeys[e.keyCode]);
     player.reachWater();
+    gem.checkCollisions();
 });
