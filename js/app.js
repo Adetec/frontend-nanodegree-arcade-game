@@ -224,6 +224,14 @@ class Star {
 
 let star = new Star(-100, -100);
 
+class Gems {
+    constructor() {
+        this.x = 100;
+        this.y = 300;
+        this.sprite = 'images/gem-blue.png';
+    }
+}
+
 
 
 // This listens for key presses and sends the keys to your
