@@ -1,16 +1,16 @@
 body {
     text-align: center;
 }
+canvas {
+    display: none;
+}
 
 .modal {
-    width: 90%;
-    height: auto;
-    position: absolute;
-    top: 350px;
-    margin: 0 5%;
     background: #dfd9c8;
     border: 5px solid #43477a;
     border-radius: 8px;
+    width: 510px;
+    margin: 10% auto;
 }
 
 .hide {

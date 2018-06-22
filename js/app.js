@@ -7,6 +7,8 @@ function getImage(id) {
     imageSelected.style.opacity = 1;
     setTimeout(() => {
         modal.classList.add('hide');
+        let gameCanvas = document.querySelector('canvas');
+        gameCanvas.style.display = 'initial';
     }, 1000);
 }
 
