@@ -4,8 +4,9 @@ function getImage(id) {
     let imageSelected = document.getElementById(id);
     console.log(imageSelected.getAttribute('src'));
     playerSelected = imageSelected.getAttribute('src');
+    imageSelected.style.opacity = 1;
     setTimeout(() => {
-        modal.style.display = "none";
+        modal.classList.add('hide');
     }, 1000);
 }
 

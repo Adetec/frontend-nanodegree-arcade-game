@@ -26,6 +26,10 @@ body {
     height: auto;
 }
 
+.player img {
+    opacity: 0.5;
+}
+
 .player:hover {
     background: url("../images/Selector.png") no-repeat;
     background-position: center;
@@ -34,8 +38,4 @@ body {
 
 #header {
     display: block;
-}
-
-.key-num {
-    font-size: 2em;
 }
