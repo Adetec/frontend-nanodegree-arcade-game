@@ -12,6 +12,9 @@ body {
     border: 5px solid #555;
     border-radius: 8px;
 }
+.hide {
+    display: none;
+}
 
 #body {
     display: flex;
