@@ -1,3 +1,31 @@
 body {
     text-align: center;
 }
+
+.modal {
+    width: 90%;
+    height: auto;
+    position: absolute;
+    top: 350px;
+    margin: 0 5%;
+    background: #fff;
+    border: 5px solid #555;
+    border-radius: 8px;
+}
+
+#body {
+    display: flex;
+}
+
+.player {
+    width: 20%;
+    height: auto;
+}
+
+#header {
+    display: block;
+}
+
+.key-num {
+    font-size: 2em;
+}
