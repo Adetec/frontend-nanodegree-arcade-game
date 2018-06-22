@@ -8,10 +8,11 @@ body {
     position: absolute;
     top: 350px;
     margin: 0 5%;
-    background: #fff;
-    border: 5px solid #555;
+    background: #dfd9c8;
+    border: 5px solid #43477a;
     border-radius: 8px;
 }
+
 .hide {
     display: none;
 }
@@ -23,6 +24,12 @@ body {
 .player {
     width: 20%;
     height: auto;
+}
+
+.player:hover {
+    background: url("../images/Selector.png") no-repeat;
+    background-position: center;
+    cursor: pointer;
 }
 
 #header {

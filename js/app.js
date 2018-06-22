@@ -1,3 +1,14 @@
+const modal = document.querySelector('.modal');
+let playerSelected = 'images/char-boy.png';
+function getImage(id) {
+    let imageSelected = document.getElementById(id);
+    console.log(imageSelected.getAttribute('src'));
+    playerSelected = imageSelected.getAttribute('src');
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 1000);
+}
+
 let movementMultip = 40;
 const box = {
     width: 50,
@@ -69,8 +80,8 @@ class Enemy {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-    constructor() {
-        this.sprite = 'images/char-boy.png';
+    constructor(sprite) {
+        this.sprite = sprite;
         this.x = 200;
         this.y = 400;
         this.moveX = 100;
@@ -82,6 +93,7 @@ class Player {
 
     update() {
         this.gameOver();
+        this.sprite = playerSelected;
     }
 
     render() {
@@ -164,7 +176,7 @@ for (let num = 1; num <= 3; num++){
     pos +=85;   
 }
 // Place the player object in a variable called player
-let player = new Player();
+let player = new Player(playerSelected);
 
 class Life {
     constructor(x, y) {

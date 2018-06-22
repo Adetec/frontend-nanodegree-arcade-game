@@ -25,6 +25,7 @@ const Engine = ((global => {
     let ctx = canvas.getContext('2d');
     let lastTime;
     let selectPlayer = doc.querySelector('.modal');
+    let selector = doc.querySelector('#selector');
    
     canvas.width = 505;
     canvas.height = 606;
@@ -66,7 +67,6 @@ const Engine = ((global => {
      * game loop.
      */
     function init() {
-        console.log(selectPlayer);
         reset();
         lastTime = Date.now();
         main();
