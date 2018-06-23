@@ -351,7 +351,7 @@ class Keylive {
 
 }
 
-let keyLive = new Keylive(200, 200);
+let keyLive = new Keylive(-200, 200);
 
 
 // This listens for key presses and sends the keys to your
