@@ -111,7 +111,7 @@ class Player {
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        ctx.font = '24px fantasy';
+        ctx.font = '24px arial';
         ctx.strokeStyle = '#4caf50';
         ctx.strokeText('Level: '+this.level, 200, 30);
         ctx.fillText('Score: '+this.score, 350, 30);
