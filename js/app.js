@@ -254,8 +254,6 @@ class Star {
     
 }
 
-let star = new Star(-100, -100);
-
 class Gems {
     constructor(sprite, x, y) {
         this.x = x;
@@ -312,8 +310,6 @@ class Gems {
     }
 }
 
-let gem = new Gems('images/gem-blue.png');
-
 class Keylive {
     constructor(x, y) {
         this.sprite = 'images/key.png';
@@ -367,7 +363,6 @@ class Keylive {
 
 }
 
-let keyLive = new Keylive(-200, 200);
 
 
 // Now instantiate your objects.
@@ -386,8 +381,9 @@ for (let num = 1; num <= 3; num++){
 }
 // Place the player object in a variable called player
 let player = new Player(playerSelected);
-
-
+let star = new Star(-100, -100);
+let gem = new Gems('images/gem-blue.png');
+let keyLive = new Keylive(-200, 200);
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', e => {
