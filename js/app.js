@@ -134,6 +134,7 @@ class Player {
             this.y -= this.moveY;
             audioFiles.move.play();
         }
+        (allowedKeys == 'reload') && document.location.reload(true);
     }
     // Check if player reachs the water increase level & reset his position
     reachWater() {
@@ -360,7 +361,8 @@ document.addEventListener('keyup', e => {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        80: 'reload'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
