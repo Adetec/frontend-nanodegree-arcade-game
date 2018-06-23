@@ -9,7 +9,7 @@
  * drawn but that is not the case. What's really happening is the entire "scene"
  * is being drawn over and over, presenting the illusion of animation.
  *
- * This engine makes the canvas' context (ctx) object globally available to make 
+ * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
 
@@ -19,18 +19,18 @@ const Engine = ((global => {
      * set the canvas elements height/width and add it to the DOM.
      */
     let doc = global.document;
-   
+
     let win = global.window;
     let canvas = doc.createElement('canvas');
     let ctx = canvas.getContext('2d');
     let lastTime;
     let selectPlayer = doc.querySelector('.modal');
     let selector = doc.querySelector('#selector');
-   
+
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
-   
+
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
@@ -42,26 +42,26 @@ const Engine = ((global => {
       * computer is) - hurray time!
       */
      let now = Date.now();
-   
+
      let dt = (now - lastTime) / 1000.0;
-   
+
      /* Call our update/render functions, pass along the time delta to
       * our update function since it may be used for smooth animation.
       */
      update(dt);
      render();
-   
+
      /* Set our lastTime variable which is used to determine the time delta
       * for the next time this function is called.
       */
      lastTime = now;
-   
+
      /* Use the browser's requestAnimationFrame function to call this
       * function again as soon as the browser is able to draw another frame.
       */
      win.requestAnimationFrame(main);
     }
-   
+
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
      * game loop.
@@ -71,7 +71,7 @@ const Engine = ((global => {
         lastTime = Date.now();
         main();
     }
-   
+
     /* This function is called by main (our game loop) and itself calls all
      * of the functions which may need to update entity's data. Based on how
      * you implement your collision detection (when two entities occupy the
@@ -85,7 +85,7 @@ const Engine = ((global => {
         updateEntities(dt);
         //checkCollisions();
     }
-   
+
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
@@ -94,15 +94,19 @@ const Engine = ((global => {
      * render methods.
      */
     function updateEntities(dt) {
+        // Loop over all enemies to to update each one and check their collision method
         allEnemies.forEach(enemy => {
             enemy.update(dt);
             enemy.checkCollisions();
         });
+        // Update player object
         player.update();
+        // Update gem collision
         gem.checkCollisions();
+        // Update keuLife collision
         keyLife.checkCollisions();
     }
-   
+
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
      * game tick (or loop of the game engine) because that's how games work -
@@ -121,15 +125,15 @@ const Engine = ((global => {
              'images/grass-block.png',   // Row 1 of 2 of grass
              'images/grass-block.png'    // Row 2 of 2 of grass
          ];
-   
+
      let numRows = 6;
      let numCols = 5;
      let row;
      let col;
-   
+
      // Before drawing, clear existing canvas
      ctx.clearRect(0,0,canvas.width,canvas.height);
-   
+
      /* Loop through the number of rows and columns we've defined above
       * and, using the rowImages array, draw the correct image for that
       * portion of the "grid"
@@ -146,10 +150,10 @@ const Engine = ((global => {
              ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
          }
      }
-   
+
      renderEntities();
     }
-   
+
     /* This function is called by the render function and is called on each game
      * tick. Its purpose is to then call the render functions you have defined
      * on your enemy and player entities within app.js
@@ -161,24 +165,28 @@ const Engine = ((global => {
         for (const enemy of allEnemies) {
             enemy.render();
         };
-
+        // Render player object
+        player.render();
+        // Create lives array to put new hearts lives into it
         lives = [];
-
+        // create 3 hearts depending on initial player remainAlive
         for (let i = 1; i <= player.remainAlive; i++) {
-            let heart = new Life(i*20, 0);
-            lives.push(heart);
-            
+            let heart = new Life(i*20, 0);// create new heart object
+            lives.push(heart);// Add it to lives array
         }
-           player.render();
-        
+
+        // Render each heart added into lives array
         for (const life of lives) {
             life.render();
         }
+        // Render star object
         star.render();
+        // Render gem object
         gem.render();
+        // Render life Key object
         keyLife.render();
     }
-   
+
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
@@ -186,7 +194,7 @@ const Engine = ((global => {
     function reset() {
         // noop
     }
-   
+
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
@@ -210,11 +218,10 @@ const Engine = ((global => {
         'images/key.png'
     ]);
     Resources.onReady(init);
-   
+
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developers can use it more easily
      * from within their app.js files.
      */
     global.ctx = ctx;
    }))(this);
-   

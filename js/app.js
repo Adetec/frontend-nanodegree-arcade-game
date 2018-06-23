@@ -14,7 +14,7 @@ const audioFiles = {
 };
 // Declare movement multiplier and assign 40 into it as initial multiplyer:
 let movementMultip = 40;
-// Declare initial images boxe dimensions drawed inside our canvas: 
+// Declare initial images boxe dimensions drawed inside our canvas:
 const box = {
     width: 50,
     height: 40
@@ -28,7 +28,7 @@ const box = {
 // Create getImage function that sets playerSelected by user:
 function getImage(id) {
     let imageSelected = document.getElementById(id);// get image element by its Id that user clicked on
-    playerSelected = imageSelected.getAttribute('src');// get player image source selected by user 
+    playerSelected = imageSelected.getAttribute('src');// get player image source selected by user
     imageSelected.style.opacity = 1;// change image opacity on click
     //When clicked, hide select model element after 1 seconde
     setTimeout(() => {
@@ -67,7 +67,7 @@ class Enemy {
 
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
-    
+
     update(dt) {
         // You should multiply any movement by the dt parameter
         // which will ensure the game runs at the same speed for
@@ -98,13 +98,13 @@ class Enemy {
             player.resetPlayer();// Reset player initial position
             player.remainAlive--;// Decrese player lives
             lives.pop();// remove life object from lives array
-            //If Player has less than 3 lives, display life key bonus 
+            //If Player has less than 3 lives, display life key bonus
             (player.remainAlive < 3 && player.remainAlive >0) && keyLife.display();
         }
-    
+
     }
 
-    
+
 }
 
 // Now write your own player class
@@ -116,8 +116,8 @@ class Player {
         this.sprite = sprite;// this will get image source before selecting player by user
         this.x = 200;
         this.y = 400;
-        this.moveX = 100;//Player horizontal move ratio 
-        this.moveY = -83;//Player vertical move ratio 
+        this.moveX = 100;//Player horizontal move ratio
+        this.moveY = -83;//Player vertical move ratio
         this.remainAlive = 3;// Give player 3 lives
         this.level = 1;// Initial game level
         this.score = 0;// Initial game score
@@ -158,7 +158,7 @@ class Player {
 
     // Check if player reachs the water increase level & reset his position
     reachWater() {
-       
+
        if (this.y === -15) {// If player reaches water
             audioFiles.won.play();// Play won sound effect
             movementMultip += 10;// Increase enemies speed by adding 10 to movement multiplier
@@ -176,7 +176,7 @@ class Player {
                 star.y = -100;
                 gem.display();
             }, 2000);
-        }       
+        }
     }
     // Create prototype function that adds score
     addScore() {
@@ -207,7 +207,7 @@ class Player {
             this.x = -100;// move player offscreen
             allEnemies = [];// delete enemies
             gameOverModal.classList.remove('hide');// Show gmae over modal element
-            //Inner stats text 
+            //Inner stats text
             stats.innerHTML = `${gem.gemCollected} gems collected.
             Score: ${this.score}.
             Level: ${this.level}`;
@@ -229,7 +229,7 @@ class Life {
     }
     // Draw the live object (hearts) on our canvas:
     render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height); 
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
     }
 }
 
@@ -249,7 +249,7 @@ class Star {
         ctx.font = '16px arial';// Style score text font
         ctx.strokeStyle = 'red';// Style score text color
         ctx.strokeText('+'+this.score, this.x+35, this.y+110);// Draw The score text inside the star
-        
+
     }
 }
 
@@ -389,7 +389,7 @@ let rowPos = 60;// create Y position and assign initial value (needed for th loo
 for (let num = 1; num <= 3; num++){
     let bug = new Enemy(-1000,rowPos, 200);// create new enemy object
     allEnemies.push(bug);// add it to allEnemies array
-    rowPos += 85;// Change Y position for the next new enemy object 
+    rowPos += 85;// Change Y position for the next new enemy object
 }
 // Place the player object in a variable called player
 let player = new Player(playerSelected);
