@@ -177,8 +177,8 @@ class Player {
         if (this.remainAlive < 1) {
             this.x = -100;
             allEnemies = [];
-            ctx.strokeText('game over', 200, 300);
             gameOverModal.classList.remove('hide');
+            stats.innerHTML += `You collected 25 gems, your score is: ${player.score}`;
 
 
         }
