@@ -7,10 +7,10 @@ const selectModal = document.querySelector('#select-player');
 let playerSelected = 'images/char-boy.png';
 //Declare Audio files objects in an object:
 const audioFiles = {
-    move: new Audio(`audio/move.wav`),
-    collect: new Audio(`audio/collect.wav`),
-    won: new Audio(`audio/won.wav`),
-    collision: new Audio(`audio/collision.wav`)
+    move: new Audio(`audio/move.wav`), // Credits: https://freesound.org/people/TheyCallMeCaudex/sounds/266138/
+    collect: new Audio(`audio/collect.wav`), // Credits: https://freesound.org/people/Mattix/sounds/402766/
+    won: new Audio(`audio/won.wav`), // Credits: https://freesound.org/people/Higgs01/sounds/430925/
+    collision: new Audio(`audio/collision.wav`) // Credits: https://freesound.org/people/noirenex/sounds/159408/
 };
 // Declare movement multiplier and assign 40 into it as initial multiplyer:
 let movementMultip = 40;
