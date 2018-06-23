@@ -105,8 +105,8 @@ class Player {
     }
 
     update() {
-        this.gameOver();
         this.sprite = playerSelected;
+        this.gameOver();
     }
 
     render() {
@@ -178,9 +178,8 @@ class Player {
             this.x = -100;
             allEnemies = [];
             gameOverModal.classList.remove('hide');
-            stats.innerHTML += `You collected 25 gems, your score is: ${player.score}`;
-
-
+            stats.innerHTML = `You collected ${gem.gemCollected} gems, your score is: ${player.score}`;
+            Player.score = 0;
         }
     }
 }
@@ -250,6 +249,7 @@ class Gems {
         this.sprite = sprite;
         this.type = ['orange', 'blue', 'green'];
         this.gemSelected = undefined;
+        this.gemCollected = 0;
     }
 
     random() {
@@ -290,6 +290,7 @@ class Gems {
             audioFiles.collect.play();
             player.score += (this.gemSelected+1)*100;
             this.x = -100;
+            this.gemCollected++;
         }
         
     }
