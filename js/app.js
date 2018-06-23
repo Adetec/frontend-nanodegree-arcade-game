@@ -4,7 +4,8 @@ let playerSelected = 'images/char-boy.png';
 const audioFiles = {
     move: new Audio(`audio/move.wav`),
     collect: new Audio(`audio/collect.wav`),
-    won: new Audio(`audio/won.wav`)
+    won: new Audio(`audio/won.wav`),
+    collision: new Audio(`audio/collision.wav`)
 };
 
 function getImage(id) {
@@ -76,6 +77,7 @@ class Enemy {
         }
 
         if (playerPosition.x < enemyPosition.x + enemyPosition.width && playerPosition.x + playerPosition.width > enemyPosition.x && playerPosition.y < enemyPosition.y + enemyPosition.height && playerPosition.y + playerPosition.height > enemyPosition.y) {
+            audioFiles.collision.play();
             player.resetPlayer();
             player.remainAlive--;
             lives.pop();
