@@ -111,7 +111,7 @@ class Enemy {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-    // Create player costructor with sprite argument
+    // Create player costructor with sprite parameter
     constructor(sprite) {
         this.sprite = sprite;// this will get image source before selecting player by user
         this.x = 200;
@@ -216,25 +216,26 @@ class Player {
     }
 }
 
-
+// Create Life class
 class Life {
+    // Create Life costructor with position coordinates parameters
     constructor(x, y) {
         this.sprite = 'images/Heart.png';
         this.x = x;
         this.y = y;
+        //Resize image
         this.width = 25;
         this.height = 42;
     }
-
+    // Draw the live object (hearts) on our canvas:
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height); 
     }
 }
 
-
-
-
+// Create Star class
 class Star {
+    // Create Life costructor with position coordinates parameters
     constructor(x, y){
         this.x = x;
         this.y = y;
@@ -242,42 +243,47 @@ class Star {
         this.score = 0;
         this.gemScore = undefined;
     }
-
+    // Draw the star object on our canvas:
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        ctx.font = '16px arial';
-        ctx.strokeStyle = 'red';
-        ctx.strokeText('+'+this.score, this.x+35, this.y+110);
+        ctx.font = '16px arial';// Style score text font
+        ctx.strokeStyle = 'red';// Style score text color
+        ctx.strokeText('+'+this.score, this.x+35, this.y+110);// Draw The score text inside the star
         
     }
-
-    
 }
 
+// Create Gems class
 class Gems {
+    // Create Life costructor with position coordinates & image parameters
     constructor(sprite, x, y) {
         this.x = x;
+        // create positionX array that stores different horisontal coordinates
+        // to display it in different places
         this.positionX = [0, 100, 200, 300, 400];
         this.y = 70;
+        // create positionY array that stores different vertical coordinates
+        // to display it in different places
         this.positionY = [80, 165, 250];
         this.sprite = sprite;
+        // create Type array that stores different images file name
+        // to display it in different colors
         this.type = ['orange', 'blue', 'green'];
-        this.gemSelected = undefined;
-        this.gemCollected = 0;
+        this.gemSelected = undefined;// To get wich index type array is selected
+        this.gemCollected = 0;// To count gems collected by user
     }
-
+    // Creat random methode
     random() {
-        this.gemSelected = (Math.floor(Math.random() * this.type.length));
-        this.sprite = `images/gem-${this.type[this.gemSelected]}.png`;
-        this.x = this.positionX[Math.floor(Math.random() * this.positionX.length)];
-        this.y = this.positionY[Math.floor(Math.random() * this.positionY.length)];
-        console.log(this.sprite, this.x, this.gemSelected)
+        this.gemSelected = (Math.floor(Math.random() * this.type.length));// Store the the index type array selected randomly
+        this.sprite = `images/gem-${this.type[this.gemSelected]}.png`;//Build the gem path file and store it into sprite
+        this.x = this.positionX[Math.floor(Math.random() * this.positionX.length)];// Set the x position randomly
+        this.y = this.positionY[Math.floor(Math.random() * this.positionY.length)];// Set the y position randomly
     }
-
+    // Draw the gem object object on our canvas:
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x+10, this.y, 80, 135);
     }
-
+    // Create a methode that display randomly the gem object on our canvas:
     display() {
         this.random();
         setTimeout(() => {
