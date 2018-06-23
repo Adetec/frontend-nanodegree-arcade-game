@@ -1,18 +1,36 @@
+/**************************
+ *Declare global variables*
+ **************************/
+// Get Select player modal element:
 const selectModal = document.querySelector('#select-player');
+// Declare initial player image:
 let playerSelected = 'images/char-boy.png';
-//Audio
+//Declare Audio files objects in an object:
 const audioFiles = {
     move: new Audio(`audio/move.wav`),
     collect: new Audio(`audio/collect.wav`),
     won: new Audio(`audio/won.wav`),
     collision: new Audio(`audio/collision.wav`)
 };
+// Declare movement multiplier and assign 40 into it as initial multiplyer:
+let movementMultip = 40;
+// Declare initial images boxe dimensions drawed inside our canvas: 
+const box = {
+    width: 50,
+    height: 40
+}
 
+
+/*****x************
+ *Create functions*
+ ******************/
+
+// Create getImage function that sets playerSelected by user:
 function getImage(id) {
-    let imageSelected = document.getElementById(id);
-    console.log(imageSelected.getAttribute('src'));
-    playerSelected = imageSelected.getAttribute('src');
-    imageSelected.style.opacity = 1;
+    let imageSelected = document.getElementById(id);// get image element by its Id that user clicked on
+    playerSelected = imageSelected.getAttribute('src');// get player image source selected by user 
+    imageSelected.style.opacity = 1;// change image opacity on click
+    //When clicked, hide select model element after 1 seconde
     setTimeout(() => {
         selectModal.classList.add('hide');
         let gameCanvas = document.querySelector('canvas');
@@ -20,12 +38,10 @@ function getImage(id) {
     }, 1000);
 }
 
-let movementMultip = 40;
-const box = {
-    width: 50,
-    height: 40
-}
-let waterScore = 0;
+/*****x**********
+ *Create classes*
+ ****************/
+
 // Enemies our player must avoid
 class Enemy {
     constructor(x, y, sp) {
@@ -38,8 +54,7 @@ class Enemy {
         this.x = x;
         this.y = y;
         this.sp = sp;
-        //
-        // Draw the enemy on the screen, required method for game
+    // Draw the enemy on the screen, required method for game
     this.render = function() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     };
@@ -60,30 +75,33 @@ class Enemy {
         let run = ()=>{this.x = -300; ; this.randomSpeed()};
         (this.x<505)?  this.x += this.sp * dt : run();
     }
-
+    // Check if player collides with an enemy,
+    // the player moves back to the start square
     checkCollisions() {
-
+        // Get actual player position
         let playerPosition =  {
             x: player.x,
             y: player.y,
             width: box.width,
             height: box.height
         }
+        // Get actual enemy position
         let enemyPosition = {
             x: this.x,
             y: this.y,
             width: box.width +10,
             height: box.height
         }
-
+        // If collision happened:
         if (playerPosition.x < enemyPosition.x + enemyPosition.width && playerPosition.x + playerPosition.width > enemyPosition.x && playerPosition.y < enemyPosition.y + enemyPosition.height && playerPosition.y + playerPosition.height > enemyPosition.y) {
-            audioFiles.collision.play();
-            player.resetPlayer();
-            player.remainAlive--;
-            lives.pop();
+            audioFiles.collision.play();// Play sound
+            player.resetPlayer();// Reset player initial position
+            player.remainAlive--;// Decrese player lives
+            lives.pop();// remove life object from lives array
+            //If Player has less than 3 lives, display live key bonus 
             (player.remainAlive < 3 && player.remainAlive >0) && keyLive.display();
         }
-        
+    
     }
 
     
@@ -93,60 +111,66 @@ class Enemy {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
+    // Create player costructor with sprite argument
     constructor(sprite) {
-        this.sprite = sprite;
+        this.sprite = sprite;// this will get image source before selecting player by user
         this.x = 200;
         this.y = 400;
-        this.moveX = 100;
-        this.moveY = -83;
-        this.remainAlive = 3;
-        this.level = 1;
-        this.score = 0;
+        this.moveX = 100;//Player horizontal move ratio 
+        this.moveY = -83;//Player vertical move ratio 
+        this.remainAlive = 3;// Give player 3 lives
+        this.level = 1;// Initial game level
+        this.score = 0;// Initial game score
     }
 
     update() {
-        this.sprite = playerSelected;
-        this.gameOver();
+        this.sprite = playerSelected;// Set Player image source after selecting player by user
+        this.gameOver();// call game over methode if player lose all lives
     }
-
+    // Draw the player object, score, hearts live and level on our canvas:
     render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-        ctx.font = '24px arial';
-        ctx.strokeStyle = '#4caf50';
-        ctx.strokeText('Level: '+this.level, 200, 30);
-        ctx.fillText('Score: '+this.score, 350, 30);
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);// Draw player
+        ctx.font = '24px arial';// Style level and score font
+        ctx.strokeStyle = '#4caf50';//Style level color
+        ctx.strokeText('Level: '+this.level, 200, 30);// Draw level
+        ctx.fillText('Score: '+this.score, 350, 30);// Draw score
     }
-    // move player with arrows keys & prevent move if player will be offscreen
+    // Move player with arrows keys & prevent move if player will be offscreen
     handleInput(allowedKeys) {
-        if (allowedKeys == 'left' && this.x > 0) {
-            this.x -= this.moveX;
-            audioFiles.move.play();
+        if (allowedKeys == 'left' && this.x > 0) {// If user press left key
+            this.x -= this.moveX;// Move player 100px to the left
+            audioFiles.move.play();// Play move sound effect
         }
-        if (allowedKeys == 'right' && this.x < 400) {
-            this.x += this.moveX;
-            audioFiles.move.play();
+        if (allowedKeys == 'right' && this.x < 400) {// If user press right key
+            this.x += this.moveX;// Move player 100px to the right
+            audioFiles.move.play();// Play move sound effect
         }
-        if (allowedKeys == 'up' && this.y > 0) {
-            this.y += this.moveY;
-            audioFiles.move.play();
+        if (allowedKeys == 'up' && this.y > 0) {// If user press up key
+            this.y += this.moveY;// Move player 83px up
+            audioFiles.move.play();// Play move sound effect
         }
-        if (allowedKeys == 'down' && this.y < 400) {
-            this.y -= this.moveY;
-            audioFiles.move.play();
+        if (allowedKeys == 'down' && this.y < 400) {// If user press down key
+            this.y -= this.moveY;// Move player 83px down
+            audioFiles.move.play();// Play move sound effect
         }
         (allowedKeys == 'reload') && document.location.reload(true);
     }
+
     // Check if player reachs the water increase level & reset his position
     reachWater() {
         
-       if (this.y === -15) {
-        audioFiles.won.play();
-        movementMultip += 10;
-        this.level++;
-        star.x = this.x;
-        star.y = this.y;
-        this.addScore();
-        this.resetPlayer();
+       if (this.y === -15) {// If player reaches water
+            audioFiles.won.play();// Play won sound effect
+            movementMultip += 10;// Increase enemies speed by adding 10 to movement multiplier
+            this.level++;// increase level
+            // Display star score in the same pleyr position
+            star.x = this.x;
+            star.y = this.y;
+            // Add score
+            this.addScore();
+            // Reset player to his initial position
+            this.resetPlayer();
+            // Hide the star score after 2 secondes
             setTimeout(() => {
                 star.x = -100;
                 star.y = -100;
@@ -154,7 +178,7 @@ class Player {
             }, 2000);
         }       
     }
-
+    
     addScore() {
         const playerX = [0, 100, 200, 300, 400];
         const scores = [100, 80, 60, 40, 20];
