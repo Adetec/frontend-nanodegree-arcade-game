@@ -179,7 +179,7 @@ class Player {
             this.x = -100;
             allEnemies = [];
             gameOverModal.classList.remove('hide');
-            stats.innerHTML = `${gem.gemCollected} gems.
+            stats.innerHTML = `${gem.gemCollected} gems collected.
             Score: ${this.score}.
             Level: ${this.level}`;
             Player.score = 0;
@@ -342,6 +342,7 @@ class Keylive {
         }
 
         if (playerPosition.x < keyPosition.x + keyPosition.width && playerPosition.x + playerPosition.width > keyPosition.x && playerPosition.y < keyPosition.y + keyPosition.height && playerPosition.y + playerPosition.height > keyPosition.y) {
+            audioFiles.collect.play();
             player.remainAlive++;
             let heart = new Life(lives.length*20, 0);
             lives.push(heart);
