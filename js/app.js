@@ -216,22 +216,6 @@ class Player {
     }
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-let allEnemies = [];
-let pos = 60;
-//let xStart = -200;
-
-for (let num = 1; num <= 3; num++){
-    
-    
-    let bug = new Enemy(-1000,pos, 200);
-    
-    allEnemies.push(bug);
-    pos +=85;   
-}
-// Place the player object in a variable called player
-let player = new Player(playerSelected);
 
 class Life {
     constructor(x, y) {
@@ -384,6 +368,24 @@ class Keylive {
 }
 
 let keyLive = new Keylive(-200, 200);
+
+
+// Now instantiate your objects.
+// Place all enemy objects in an array called allEnemies
+let allEnemies = [];
+let pos = 60;
+//let xStart = -200;
+
+for (let num = 1; num <= 3; num++){
+    
+    
+    let bug = new Enemy(-1000,pos, 200);
+    
+    allEnemies.push(bug);
+    pos +=85;   
+}
+// Place the player object in a variable called player
+let player = new Player(playerSelected);
 
 
 // This listens for key presses and sends the keys to your
