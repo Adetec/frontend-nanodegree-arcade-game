@@ -3,7 +3,8 @@ let playerSelected = 'images/char-boy.png';
 //Audio
 const audioFiles = {
     move: new Audio(`audio/move.wav`),
-    collect: new Audio(`audio/collect.wav`)
+    collect: new Audio(`audio/collect.wav`),
+    won: new Audio(`audio/won.wav`)
 };
 
 function getImage(id) {
@@ -136,6 +137,7 @@ class Player {
     reachWater() {
         
        if (this.y === -15) {
+        audioFiles.won.play();
         movementMultip += 10;
         this.level++;
         star.x = this.x;
