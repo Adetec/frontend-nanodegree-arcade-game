@@ -174,7 +174,7 @@ const Engine = ((global => {
         }
         star.render();
         gem.render();
-        keyLive.render();
+        keyLife.render();
     }
    
     /* This function does nothing but it could have been a good place to

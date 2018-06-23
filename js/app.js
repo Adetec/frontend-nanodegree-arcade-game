@@ -98,8 +98,8 @@ class Enemy {
             player.resetPlayer();// Reset player initial position
             player.remainAlive--;// Decrese player lives
             lives.pop();// remove life object from lives array
-            //If Player has less than 3 lives, display live key bonus 
-            (player.remainAlive < 3 && player.remainAlive >0) && keyLive.display();
+            //If Player has less than 3 lives, display life key bonus 
+            (player.remainAlive < 3 && player.remainAlive >0) && keyLife.display();
         }
     
     }
@@ -320,8 +320,9 @@ class Gems {
     }
 }
 
-// Create Keylive class
-class KeyLive {
+// Create Keylife class
+class KeyLife {
+    // Create KeyLife costructor with position coordinates parameters
     constructor(x, y) {
         this.sprite = 'images/key.png';
         this.x = x;
@@ -394,7 +395,7 @@ for (let num = 1; num <= 3; num++){
 let player = new Player(playerSelected);
 let star = new Star(-100, -100);
 let gem = new Gems('images/gem-blue.png');
-let keyLive = new KeyLive(-200, 200);
+let keyLife = new KeyLife(-200, 200);
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', e => {
@@ -409,5 +410,5 @@ document.addEventListener('keyup', e => {
     player.handleInput(allowedKeys[e.keyCode]);
     player.reachWater();
     gem.checkCollisions();
-    keyLive.checkCollisions();
+    keyLife.checkCollisions();
 });
