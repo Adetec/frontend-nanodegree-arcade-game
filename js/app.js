@@ -125,7 +125,7 @@ class Player {
 
     update() {
         this.sprite = playerSelected;// Set Player image source after selecting player by user
-        this.gameOver();// call game over methode if player lose all lives
+        this.gameOver();// call game over method if player lose all lives
     }
     // Draw the player object, score, hearts live and level on our canvas:
     render() {
@@ -272,7 +272,7 @@ class Gems {
         this.gemSelected = undefined;// To get wich index type array is selected
         this.gemCollected = 0;// To count gems collected by user
     }
-    // Creat random methode
+    // Creat random method
     random() {
         this.gemSelected = (Math.floor(Math.random() * this.type.length));// Store the the index type array selected randomly
         this.sprite = `images/gem-${this.type[this.gemSelected]}.png`;//Build the gem path file and store it into sprite
@@ -283,7 +283,7 @@ class Gems {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x+10, this.y, 80, 135);
     }
-    // Create a methode that display randomly the gem object after 6 secondes on our canvas:
+    // Create a method that display randomly the gem object after 6 secondes on our canvas:
     display() {
         this.random();
         setTimeout(() => {
@@ -326,76 +326,80 @@ class KeyLife {
     constructor(x, y) {
         this.sprite = 'images/key.png';
         this.x = x;
+        // create positionX array that stores different vertical coordinates
+        // to display it in different places
         this.positionX = [0, 100, 200, 300, 400];
         this.y = y;
+        // create positionY array that stores different vertical coordinates
+        // to display it in different places
         this.positionY = [80, 165, 250];
     }
-
+    // Draw the keLife object object on our canvas:
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x+10, this.y, 80, 135);
     }
-
+    // Creat random method
     random() {
-        this.x = this.positionX[Math.floor(Math.random() * this.positionX.length)];
-        this.y = this.positionY[Math.floor(Math.random() * this.positionY.length)];
+        this.x = this.positionX[Math.floor(Math.random() * this.positionX.length)];// Set the x position randomly
+        this.y = this.positionY[Math.floor(Math.random() * this.positionY.length)];// Set the y position randomly
     }
-
+    // Create a method that display randomly the keyLive object after 6 secondes on our canvas:
     display() {
         this.random();
         setTimeout(() => {
             this.x = -100;
         }, 6000);
     }
-
+    // Check if player collides with the key,
+    // a life will be added and player remainAlive property be incremented by 1
     checkCollisions() {
-
+        // Get actual player position
         let playerPosition =  {
             x: player.x,
             y: player.y,
             width: box.width,
             height: box.height
         }
+        // Get actual key position
         let keyPosition = {
             x: this.x,
             y: this.y,
             width: box.width +10,
             height: box.height
         }
-
+        // If collision happened:
         if (playerPosition.x < keyPosition.x + keyPosition.width && playerPosition.x + playerPosition.width > keyPosition.x && playerPosition.y < keyPosition.y + keyPosition.height && playerPosition.y + playerPosition.height > keyPosition.y) {
-            audioFiles.collect.play();
-            player.remainAlive++;
-            let heart = new Life(lives.length*20, 0);
-            lives.push(heart);
-            this.x = -100;
+            audioFiles.collect.play();// Play collect sound effect
+            player.remainAlive++;// add 1 life to th player
+            let heart = new Life(lives.length*20, 0);// create a new Life and set position coordinates arguments
+            lives.push(heart);// add the new heart object into lives array (See engine.js-line 163)
+            this.x = -100;// hide the key by moving it offscreen
         }
-        
     }
-
-
 }
 
-
+/*****x**********
+ *Create objects*
+ ****************/
 
 // Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
 let allEnemies = [];
-let pos = 60;
-//let xStart = -200;
-
+// Place all enemy objects in an array called allEnemies
+let rowPos = 60;// create Y position and assign initial value (needed for th loop below)
 for (let num = 1; num <= 3; num++){
-    
-    
-    let bug = new Enemy(-1000,pos, 200);
-    
-    allEnemies.push(bug);
-    pos +=85;   
+    let bug = new Enemy(-1000,rowPos, 200);// create new enemy object
+    allEnemies.push(bug);// add it to allEnemies array
+    rowPos += 85;// Change Y position for the next new enemy object 
 }
 // Place the player object in a variable called player
 let player = new Player(playerSelected);
+// Place the star object in a variable called star
 let star = new Star(-100, -100);
+// Place the gem object in a variable called gem
 let gem = new Gems('images/gem-blue.png');
+// Place the key object in a variable called keyLive
 let keyLife = new KeyLife(-200, 200);
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', e => {
@@ -406,9 +410,8 @@ document.addEventListener('keyup', e => {
         40: 'down',
         80: 'reload'
     };
-
+    // Call player handle input method
     player.handleInput(allowedKeys[e.keyCode]);
+    // Call player reach water method
     player.reachWater();
-    gem.checkCollisions();
-    keyLife.checkCollisions();
 });

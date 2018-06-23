@@ -99,6 +99,8 @@ const Engine = ((global => {
             enemy.checkCollisions();
         });
         player.update();
+        gem.checkCollisions();
+        keyLife.checkCollisions();
     }
    
     /* This function initially draws the "game level", it will then call
