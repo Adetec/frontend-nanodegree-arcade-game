@@ -178,31 +178,36 @@ class Player {
             }, 2000);
         }       
     }
-    
+    // Create prototype function that adds score
     addScore() {
+        // Create array to store inside different player x position  coordinates in canvas columns
         const playerX = [0, 100, 200, 300, 400];
+        // Create array to store inside different score ration in canvas columns
         const scores = [100, 80, 60, 40, 20];
+        // Loop over playerX & scores arrays to match each array value based on their indexes
         for (let x = 0; x <= playerX.length ; x++) {
-            if (playerX[x] == this.x) {
-                this.score+= scores[x];
-                star.score = scores[x];
+            if (playerX[x] == this.x) {// If the value array matches players column position
+                this.score+= scores[x];// Add aray value to score
+                star.score = scores[x];// Show the score value to be added on the star displayed
             }
         }
     }
 
-    // reset player position
+    // Create prototype function that resets player position
     resetPlayer() {
        this.x = 200;
        this.y = 400;
     }
 
+    // Create game over prototype function
     gameOver() {
-        let gameOverModal = document.querySelector('#game-over');
-        let stats = document.querySelector('#stats');
-        if (this.remainAlive < 1) {
-            this.x = -100;
-            allEnemies = [];
-            gameOverModal.classList.remove('hide');
+        let gameOverModal = document.querySelector('#game-over');// Get Game over modal element
+        let stats = document.querySelector('#stats');// get Stats elemnt
+        if (this.remainAlive < 1) {// If player loses all his lives
+            this.x = -100;// move player offscreen
+            allEnemies = [];// delete enemies
+            gameOverModal.classList.remove('hide');// Show gmae over modal element
+            //Inner stats text 
             stats.innerHTML = `${gem.gemCollected} gems collected.
             Score: ${this.score}.
             Level: ${this.level}`;
