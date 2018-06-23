@@ -1,5 +1,10 @@
 const modal = document.querySelector('.modal');
 let playerSelected = 'images/char-boy.png';
+//Audio
+const audioFiles = {
+    move: new Audio(`audio/move.wav`) 
+};
+
 function getImage(id) {
     let imageSelected = document.getElementById(id);
     console.log(imageSelected.getAttribute('src'));
@@ -105,22 +110,26 @@ class Player {
         ctx.font = '24px fantasy';
         ctx.strokeStyle = '#4caf50';
         ctx.strokeText('Level: '+this.level, 200, 30);
-        ctx.fillText('Score: '+this.score, 350, 30)
+        ctx.fillText('Score: '+this.score, 350, 30);
     }
     // move player with arrows keys & prevent move if player will be offscreen
     handleInput(allowedKeys) {
         if (allowedKeys == 'left' && this.x > 0) {
             this.x -= this.moveX;
+            audioFiles.move.play();
         }
         if (allowedKeys == 'right' && this.x < 400) {
             this.x += this.moveX;
+            audioFiles.move.play();
         }
         if (allowedKeys == 'up' && this.y > 0) {
             this.y += this.moveY;
+            audioFiles.move.play();
         }
         if (allowedKeys == 'down' && this.y < 400) {
             this.y -= this.moveY;
-        }        
+            audioFiles.move.play();
+        }
     }
     // Check if player reachs the water increase level & reset his position
     reachWater() {
