@@ -158,7 +158,7 @@ class Player {
 
     // Check if player reachs the water increase level & reset his position
     reachWater() {
-        
+       
        if (this.y === -15) {// If player reaches water
             audioFiles.won.play();// Play won sound effect
             movementMultip += 10;// Increase enemies speed by adding 10 to movement multiplier
@@ -283,40 +283,45 @@ class Gems {
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x+10, this.y, 80, 135);
     }
-    // Create a methode that display randomly the gem object on our canvas:
+    // Create a methode that display randomly the gem object after 6 secondes on our canvas:
     display() {
         this.random();
         setTimeout(() => {
             this.x = -100;
         }, 6000);
     }
-
+    // Check if player collides with the gem,
+    // the The score will be incremented depend on the gem color
     checkCollisions() {
-
+        // Get actual player position
         let playerPosition =  {
             x: player.x,
             y: player.y,
-            width: box.width,
-            height: box.height
+            width: box.width,// Get its box width
+            height: box.height// Get its box height
         }
+        // Get actual gem position
         let gemPosition = {
             x: this.x,
             y: this.y,
-            width: box.width +10,
-            height: box.height
+            width: box.width +10,// Get its box width
+            height: box.height// Get its box height
         }
-
+        // If collision happened:
         if (playerPosition.x < gemPosition.x + gemPosition.width && playerPosition.x + playerPosition.width > gemPosition.x && playerPosition.y < gemPosition.y + gemPosition.height && playerPosition.y + playerPosition.height > gemPosition.y) {
-            audioFiles.collect.play();
+            audioFiles.collect.play();// Play collect sound effect
+            // If th gem collect is orange the score will be incremented by 100
+            // If th gem collect is blue the score will be incremented by 200
+            // If th gem collect is green the score will be incremented by 300
             player.score += (this.gemSelected+1)*100;
-            this.x = -100;
-            this.gemCollected++;
+            this.x = -100;// hide the gem by moving it offscreen
+            this.gemCollected++;// increment player gem collected
         }
-        
     }
 }
 
-class Keylive {
+// Create Keylive class
+class KeyLive {
     constructor(x, y) {
         this.sprite = 'images/key.png';
         this.x = x;
@@ -389,7 +394,7 @@ for (let num = 1; num <= 3; num++){
 let player = new Player(playerSelected);
 let star = new Star(-100, -100);
 let gem = new Gems('images/gem-blue.png');
-let keyLive = new Keylive(-200, 200);
+let keyLive = new KeyLive(-200, 200);
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', e => {
