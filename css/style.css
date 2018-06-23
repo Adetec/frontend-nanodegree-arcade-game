@@ -36,6 +36,11 @@ canvas {
     cursor: pointer;
 }
 
-#header {
+.header {
     display: block;
+}
+
+#stats {
+    height: 62px;
+    margin: 12px auto;
 }

@@ -8,9 +8,9 @@
     <script defer src="https://unpkg.com/promise-polyfill"></script>
 </head>
 <body>
-    <div class="modal">
-        <div id="header">
-            <h1 id="title">
+    <div class="modal hide">
+        <div class="header">
+            <h1 class="title">
                 Arcade game frogger
             </h1>
             <p id="description">Choose a player</p>
@@ -33,6 +33,19 @@
             </div>
         </div>
 
+    </div>
+    <div class="modal">
+        <div class="header">
+            <h1 class="title">
+                Game over
+            </h1>
+            <p id="result">
+                Press P to play again 
+            </p>
+        </div>
+        <div id="stats">
+            you collected 30 gems, Your score is 1034
+        </div>
     </div>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
