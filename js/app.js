@@ -372,7 +372,7 @@ class KeyLife {
             audioFiles.collect.play();// Play collect sound effect
             player.remainAlive++;// add 1 life to th player
             let heart = new Life(lives.length*20, 0);// create a new Life and set position coordinates arguments
-            lives.push(heart);// add the new heart object into lives array (See engine.js-line 163)
+            lives.push(heart);// add the new heart object into lives array (See engine.js-line 171)
             this.x = -100;// hide the key by moving it offscreen
         }
     }
