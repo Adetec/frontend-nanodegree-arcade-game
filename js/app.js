@@ -1,4 +1,4 @@
-const modal = document.querySelector('.modal');
+const selectModal = document.querySelector('#select-player');
 let playerSelected = 'images/char-boy.png';
 //Audio
 const audioFiles = {
@@ -14,7 +14,7 @@ function getImage(id) {
     playerSelected = imageSelected.getAttribute('src');
     imageSelected.style.opacity = 1;
     setTimeout(() => {
-        modal.classList.add('hide');
+        selectModal.classList.add('hide');
         let gameCanvas = document.querySelector('canvas');
         gameCanvas.style.display = 'initial';
     }, 1000);
@@ -172,10 +172,15 @@ class Player {
     }
 
     gameOver() {
+        let gameOverModal = document.querySelector('#game-over');
+        let stats = document.querySelector('#stats');
         if (this.remainAlive < 1) {
             this.x = -100;
             allEnemies = [];
-            ctx.strokeText('game over', 200, 300);   
+            ctx.strokeText('game over', 200, 300);
+            gameOverModal.classList.remove('hide');
+
+
         }
     }
 }

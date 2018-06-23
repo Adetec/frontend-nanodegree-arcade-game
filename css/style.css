@@ -44,3 +44,11 @@ canvas {
     height: 62px;
     margin: 12px auto;
 }
+
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    width: 50%;
+    margin: 0 auto;
+}
