@@ -2,7 +2,8 @@ const modal = document.querySelector('.modal');
 let playerSelected = 'images/char-boy.png';
 //Audio
 const audioFiles = {
-    move: new Audio(`audio/move.wav`) 
+    move: new Audio(`audio/move.wav`),
+    collect: new Audio(`audio/collect.wav`)
 };
 
 function getImage(id) {
@@ -277,6 +278,7 @@ class Gems {
         }
 
         if (playerPosition.x < gemPosition.x + gemPosition.width && playerPosition.x + playerPosition.width > gemPosition.x && playerPosition.y < gemPosition.y + gemPosition.height && playerPosition.y + playerPosition.height > gemPosition.y) {
+            audioFiles.collect.play();
             player.score += (this.gemSelected+1)*100;
             this.x = -100;
         }
