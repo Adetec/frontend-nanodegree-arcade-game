@@ -52,3 +52,8 @@ canvas {
     width: 50%;
     margin: 0 auto;
 }
+
+.description {
+    font-size: 1.2em;
+    color: darkslateblue;
+}
