@@ -179,7 +179,9 @@ class Player {
             this.x = -100;
             allEnemies = [];
             gameOverModal.classList.remove('hide');
-            stats.innerHTML = `You collected ${gem.gemCollected} gems, your score is: ${player.score}`;
+            stats.innerHTML = `${gem.gemCollected} gems.
+            Score: ${this.score}.
+            Level: ${this.level}`;
             Player.score = 0;
         }
     }
