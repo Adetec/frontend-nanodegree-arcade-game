@@ -4,7 +4,9 @@ body {
 canvas {
     display: none;
 }
-
+/*
+ * Styles for modals
+ */
 .modal {
     background: #dfd9c8;
     border: 5px solid #43477a;
@@ -12,47 +14,48 @@ canvas {
     width: 510px;
     margin: 10% auto;
 }
-
+/* Create class that hides elements */
 .hide {
     display: none;
 }
-
-#body {
+/* Styles flex elements */
+.flex {
     display: flex;
 }
-
+/* Styles players images */
 .player {
     width: 20%;
     height: auto;
 }
-
+/* Make transparency to images players */
 .player img {
     opacity: 0.5;
 }
-
+/* styles backround player image when when user hover on it */
 .player:hover {
     background: url("../images/Selector.png") no-repeat;
     background-position: center;
     cursor: pointer;
 }
-
+/* Styles modals title */
 .header {
     display: block;
 }
-
+/* Styles stats element */
 #stats {
+    font-weight: bold;
     height: 62px;
     margin: 12px auto;
 }
-
+/* Styles game over modal */
 #game-over {
     position: absolute;
-    top: 50%;
+    top: 162px;
     left: 25%;
     width: 50%;
     margin: 0 auto;
 }
-
+/* Styles description text */
 .description {
     font-size: 1.2em;
     color: darkslateblue;

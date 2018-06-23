@@ -20,7 +20,6 @@ const box = {
     height: 40
 }
 
-
 /*****x************
  *Create functions*
  ******************/
